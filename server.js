@@ -18,7 +18,7 @@ const io = new Server(server, {
   },
 });
 
-const dbFile = "NEWUSERS.json";
+const dbFile = "USERS.json";
 
 function loadUsers() {
   if (!fs.existsSync(dbFile)) return {};
