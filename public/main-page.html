@@ -347,10 +347,7 @@ nav h2 {
   const usernameElem = document.getElementById("username");
   usernameElem.textContent = getUsername;
 
-  const socket = io("", {
-    transports: ["websocket", "polling"],
-    withCredentials: false,
-  });
+  const socket = io()
 
   socket.on("connect", () => {
     console.log("✅ Connected to backend socket");
