@@ -1,0 +1,26 @@
+{
+    "Demo1": {
+        "fullname": "Demo1",
+        "phone_number": "99999999999",
+        "NameinUse": "Demo1",
+        "hash_password": "$2b$10$dbFwz4dQRovwynIgUNTsZ.6SZe83AituPMPPXJqsivFPdUlUegFA6"
+    },
+    "Demo3": {
+        "fullname": "Demo3",
+        "phone_number": "1111111111",
+        "NameinUse": "Demo3",
+        "hash_password": "$2b$10$8IYKmUDZlv38/5QZzd0uhuhDJ1DtAopuPkXVv6Z1dLMXFb0s0FZkm"
+    },
+    "Demo2": {
+        "fullname": "Demo2",
+        "phone_number": "9831056783",
+        "NameinUse": "Demo2",
+        "hash_password": "$2b$10$rYtIC3STpxbKfxIAENkgB.HwxMFPX33.OdMfKgoDkL2GlblDy68AW"
+    },
+    "sabik2007": {
+        "fullname": "Sabik Kundu",
+        "phone_number": "9748101441",
+        "NameinUse": "sabik2007",
+        "hash_password": "$2b$10$jg9.M8jiKcF4fWgH4TQxo.imzPpQH8V6xA87IrfLPdkquZIUFDHbm"
+    }
+}

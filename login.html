@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login-Page</title>
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width:99%;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+nav h1 {
+    margin: 0;
+    font-size: 1.8em;
+    flex-grow: 1;
+    text-align: center;
+}
+
+nav img {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    background-color: white;
+    margin-right: 15px;
+}
+
+
+#login {
+    background-color: white;
+    padding: 40px; 
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    width: 80%; 
+    max-width: 450px; 
+    margin-top: 60px;
+    box-sizing: border-box;
+}
+
+#login_form {
+    display: flex;
+    flex-direction: column;
+}
+
+#login_form h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+.Login-div {
+    margin-bottom: 20px;
+}
+
+.Login-div label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+.Login-div input[type="text"],
+.Login-div input[type="password"] {
+    width: 100%;
+    padding: 12px; 
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#submit {
+    width: 100%;
+    padding: 12px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    margin-top: 25px;
+    transition: background-color 0.3s ease;
+}
+
+#submit:hover {
+    background-color: #218838;
+}
+
+#login_form h3 {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 1em;
+}
+
+#login_form h3 a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+@media (max-width: 500px) {
+    #login {
+        width: 90%;
+        padding: 20px;
+    }
+    nav {
+        padding: 10px;
+    }
+    nav h1 {
+        font-size: 1.5em;
+    }
+}
+    </style>
+</head>
+<body>
+    <nav>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy9K-hb0JWbdAQ1o0mGTf8FOP0AY0dFBeatg&s">
+        <h1>IIC MESSAGING APP LOGIN</h1>
+    </nav>
+    <div id="login">
+        <form id="login_form">
+            <h2>Login</h2>
+            <br>
+            <div id="usernameDiv" class="Login-div">
+                <label for="username">Username: </label><input id="username" type="text" placeholder="Username" required>
+            </div>
+            <div id="passwordDiv" class="Login-div">
+                <label for="password">Password: </label><input id="password" type="password" placeholder="Password" required>
+            </div>
+            <div id="submitBtn">
+                <button id="submit">Log-in</button>
+            </div>
+            <h3>Don't Have an Account <a href="signup.html">Sign-Up?</a></h3>
+            <p id="FBM"></p>
+        </form>
+    </div>
+    <script>
+        const api_key = 'http://127.0.0.1:5001'
+        const web = 'http://127.0.0.1.5500/main-page.html'
+
+        const usernameInt = document.getElementById("username");
+        const passwordInt = document.getElementById("password");
+        const submit = document.getElementById("submit");
+        const FBM = document.getElementById("FBM");
+
+        async function handleLogin(event){
+            event.preventDefault();
+
+            const username = usernameInt.value;
+            const password = passwordInt.value
+
+            const loginData = {
+                username: username,
+                password: password
+            }
+
+            try{
+                const response = await fetch(`${api_key}/login`, {
+                    method: 'POST',
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                    body: JSON.stringify(loginData)
+                })
+
+                const result = await response.json();
+
+                if(response.ok){
+                    FBM.textContent = 'Login Sucessfull.. Redirecting'
+                    FBM.style.color = 'green'
+                    sessionStorage.setItem("username", username);
+                    window.location.href = 'main-page.html'
+                }else{
+                    FBM.textContent = `ERROR: ${result.message}`
+                    FBM.style.color = 'red'
+                }
+            }catch(error){
+                console.error(error);
+                FBM.textContent = 'Server Problem'
+                FBM.style.color = 'darkred'
+            }
+        }
+        submit.addEventListener(`click`, handleLogin)
+
+    </script>
+</body>
+</html>

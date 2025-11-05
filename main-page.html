@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IIC MESSAGING APP MAIN PAGE</title>
+    <style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f6fa;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(90deg, #007bff, #00c3ff);
+    padding: 10px 20px;
+    color: white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+nav img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+nav h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+#mainDiv {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+#leftUserBox {
+    width: 25%;
+    background-color: #ffffff;
+    border-right: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+}
+
+#usernameBox {
+    padding: 15px;
+    text-align: center;
+    background-color: #007bff;
+    color: white;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+#Users {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+#Users p {
+    padding: 10px;
+    margin-bottom: 8px;
+    background-color: #f0f2f5;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#Users p:hover {
+    background-color: #e2e6ea;
+}
+
+#chatBox {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #eef3f8;
+}
+
+#chatArea {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+}
+
+#chatTextarea {
+    width: 100%;
+    height: 100%;
+    border: none;
+    resize: none;
+    background-color: #eef3f8;
+    font-size: 1rem;
+    color: #333;
+    outline: none;
+}
+
+#userToChat {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #ffffff;
+    border-top: 1px solid #ddd;
+}
+
+#userToChat input {
+    flex: 1;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: border 0.3s;
+}
+
+#userToChat input:focus {
+    border-color: #007bff;
+}
+
+#send {
+    margin-left: 10px;
+    padding: 10px 18px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    font-weight: 600;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+#send:hover {
+    background-color: #005dc1;
+    transform: scale(1.05);
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+#username{
+    font-size: 20px;
+}
+#usernameBox{
+    background-color: #007bff;
+}
+#chatArea {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #f4f6fb;
+}
+
+#Messages {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  overflow-y: auto;
+  height: 100%;
+  background: linear-gradient(135deg, #eef2f3, #dfe9f3);
+}
+
+#Messages {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  overflow-y: auto;
+  height: 100%;
+  background: linear-gradient(135deg, #f2f5fa, #e4ebf7);
+  font-family: "Poppins", sans-serif;
+}
+
+.message {
+  max-width: 70%;
+  padding: 10px 14px;
+  border-radius: 15px;
+  position: relative;
+  word-wrap: break-word;
+  display: inline-block;
+  margin: 5px 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.my-message {
+  align-self: flex-end;
+  background: #007bff;
+  color: #fff;
+  border-bottom-right-radius: 5px;
+  margin-left: auto;
+}
+
+.other-message {
+  align-self: flex-start;
+  background: #e5e5ea;
+  color: #000;
+  border-bottom-left-radius: 5px;
+  margin-right: auto;
+}
+
+.message .user {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 3px;
+  opacity: 0.8;
+}
+
+.message .text {
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.message .time {
+  font-size: 0.7rem;
+  text-align: right;
+  margin-top: 3px;
+  opacity: 0.7;
+}
+
+.system-message {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #555;
+  background: rgba(0,0,0,0.05);
+  border-radius: 10px;
+  padding: 5px 10px;
+  margin: 10px auto;
+  width: fit-content;
+}
+
+#Users {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  background: #fff;
+}
+
+.user-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  background-color: #f8f9fb;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.user-item:hover {
+  background-color: #e6f0ff;
+  transform: scale(1.02);
+}
+
+.user-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #007bff, #00c3ff);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  margin-right: 12px;
+  font-size: 1rem;
+}
+
+.user-name {
+  flex: 1;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.user-status {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-left: 6px;
+  background-color: #ccc;
+}
+
+.user-status.online {
+  background-color: #28a745;
+}
+
+.user-status.offline {
+  background-color: #aaa; 
+}
+
+
+    </style>
+</head>
+
+<body>
+    <nav>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy9K-hb0JWbdAQ1o0mGTf8FOP0AY0dFBeatg&s">
+        <h2>IIC MESSAGING APP</h2>
+    </nav>
+    <div id="mainDiv">
+    <div id="leftUserBox">
+        <div id="usernameBox">
+            <p id="username"></p>
+        </div>
+        <div id="Users"></div>
+    </div>
+    <div id="chatBox">
+        <div id="chatArea"></div>
+    </div>
+    </div>
+    <div id="userToChat">
+        <input type="text" placeholder="Message....." required  id="message">
+        <button id="send">Send</button>
+    </div>
+    
+    
+    <script src="http://127.0.0.1:5001/socket.io/socket.io.js"></script>
+    <script>
+  let getUsername = sessionStorage.getItem("username");
+  if (!getUsername) {
+    getUsername = prompt("Enter your Username");
+    localStorage.setItem("username", getUsername);
+  }
+
+  const usernameElem = document.getElementById("username");
+  usernameElem.textContent = getUsername;
+
+  const socket = io("http://127.0.0.1:5001", {
+    transports: ["websocket", "polling"],
+    withCredentials: false,
+  });
+
+  socket.on("connect", () => {
+    console.log("✅ Connected to backend socket");
+    socket.emit("newUser", getUsername);
+  });
+
+  socket.on("connect_error", (err) => {
+    console.error(" Connection failed:", err.message);
+  });
+
+  const chatArea = document.getElementById("chatArea");
+  const messageInput = document.getElementById("message");
+  const sendBtn = document.getElementById("send");
+
+  function sendMessage() {
+    const msg = messageInput.value.trim();
+    if (msg === "") return;
+    socket.emit("sendMessage", { user: getUsername, text: msg });
+    messageInput.value = "";
+  }
+
+  sendBtn.addEventListener("click", sendMessage);
+  messageInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") sendMessage();
+  });
+
+  function createMessageBubble(user, text, time, isMe = false) {
+    const bubble = document.createElement("div");
+    bubble.classList.add("message", isMe ? "my-message" : "other-message");
+    bubble.innerHTML = `
+      <div class="user">${user}</div>
+      <div class="text">${text}</div>
+      <div class="time">${time}</div>
+    `;
+    chatArea.appendChild(bubble);
+    chatArea.scrollTop = chatArea.scrollHeight;
+  }
+
+  socket.on("rm", (data) => {
+    const { user, text, time } = data;
+    const isMe = user === getUsername;
+    createMessageBubble(user, text, time, isMe);
+  });
+
+  socket.on("userJoined", (msg) => {
+    const sysMsg = document.createElement("div");
+    sysMsg.classList.add("system-message");
+    sysMsg.textContent = `*** ${msg} ***`;
+    chatArea.appendChild(sysMsg);
+    chatArea.scrollTop = chatArea.scrollHeight;
+  });
+
+  socket.on("userLeft", (msg) => {
+    const sysMsg = document.createElement("div");
+    sysMsg.classList.add("system-message");
+    sysMsg.textContent = `*** ${msg} ***`;
+    chatArea.appendChild(sysMsg);
+    chatArea.scrollTop = chatArea.scrollHeight;
+  });
+</script>
+
+<script>
+socket.on("userList", (users) => {
+  const usersBox = document.getElementById("Users"); 
+  if (!usersBox) return; 
+  usersBox.innerHTML = ""; 
+
+  users.forEach((user) => {
+    const userDiv = document.createElement("div");
+    userDiv.classList.add("user-item");
+
+    const avatar = document.createElement("div");
+    avatar.classList.add("user-avatar");
+    avatar.textContent = user.name.charAt(0).toUpperCase();
+
+    const name = document.createElement("div");
+    name.classList.add("user-name");
+    name.textContent = user.name;
+
+    const status = document.createElement("div");
+    status.classList.add("user-status");
+    status.style.backgroundColor = user.online ? "green" : "red";
+
+    userDiv.appendChild(avatar);
+    userDiv.appendChild(name);
+    userDiv.appendChild(status);
+    usersBox.appendChild(userDiv);
+  });
+});
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IIC Sign-up Page</title>
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+#main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+}
+
+#signupDiv {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    width: 80%; 
+    max-width: 500px; 
+    margin-top: 20px; 
+    box-sizing: border-box;
+}
+
+
+#fullnameDiv, #usernameDiv, #phone_number, #passwordDiv, #confirmPasswordDiv {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+#submitBtn {
+    text-align: center;
+    margin-top: 30px;
+}
+
+#submit {
+    width: 100%;
+    padding: 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease;
+}
+
+#submit:hover {
+    background-color: #218838;
+}
+
+
+@media (max-width: 550px) {
+    #signupDiv {
+        width: 95%;
+        padding: 20px;
+    }
+    nav h1 {
+        font-size: 1.4em;
+    }
+}
+
+nav {
+    background: linear-gradient(90deg, #007bff 0%, #0056b3 100%); 
+    
+    width: 100%;
+    top: 0; 
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    color: white;
+    padding: 15px 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transition: background 0.3s ease; 
+}
+
+nav h1 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    font-size: 2em;
+    flex-grow: 1;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); 
+}
+
+nav img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 3px solid white;
+    object-fit: cover;
+    margin-right: 20px;
+    transition: transform 0.3s ease-out; 
+}
+
+nav img:hover {
+    transform: rotate(10deg) scale(1.05);
+}
+
+@media (max-width: 600px) {
+    nav {
+        padding: 10px 15px;
+    }
+    nav h1 {
+        font-size: 1.5em;
+    }
+    nav img {
+        height: 40px;
+        width: 40px;
+        margin-right: 10px;
+    }
+}
+</style>
+<body>
+    <nav>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy9K-hb0JWbdAQ1o0mGTf8FOP0AY0dFBeatg&s">
+        <h1>IIC MESSAGING APP SIGNUP PAGE</h1>
+    </nav>
+    <div id="main">
+        <div id="signupDiv">
+            <form>
+            <div id="fullnameDiv">
+                <label for="fullname">Full Name: </label>
+                <input type="text" id="fullname" placeholder="Full Name.." required>
+            </div>
+            <div id="usernameDiv">
+                <label for="username">Username: </label>
+                <input type="text" id="username" placeholder="Username.." required>
+            </div>
+            <div id="phone_number">
+                <label for="phone">Phone Number: </label>
+                <input id="phone" type="text" placeholder="Phone Number.." row="10" required> 
+             </div>
+            <div id="passwordDiv">
+                <label for="password">New Password: </label>
+                <input type="password" placeholder="Password.. " id="password" required>
+            </div>
+            <div id="confirmPasswordDiv">
+                <label for="Cpassword">Confirm Password: </label>
+                <input type="password" placeholder="Confirm Password" id="Cpassword" required>
+            </div>
+            <div id="submitBtn">
+                <button id="submit">SignUp</button>
+            </div>
+            <p id="FBM"></p>
+            </form>
+        </div>
+    </div>
+    <script>
+        const api_key = 'http://127.0.0.1:5001'
+        const web ='http://127.0.0.1.5500/login.html'
+
+        const usernameINT = document.getElementById("username");
+        const phone_numberINT = document.getElementById("phone");
+        const passwordINT = document.getElementById("password");
+        const CpasswordINT = document.getElementById("Cpassword");
+        const fullnameINT = document.getElementById("fullname");
+        const submitBtn = document.getElementById("submit");
+        const FBM = document.getElementById("FBM");
+
+        async function handleSignup(event){
+            event.preventDefault();
+
+            if(CpasswordINT.value != passwordINT.value){
+                FBM.textContent = "Confirm password and password must be same."
+                FBM.style.color = 'red'
+                return;
+            }
+
+            FBM.textContent = 'Registration Under Process...'
+            FBM.style.color = '#333'
+
+            const userData = {
+                username: usernameINT.value,
+                fullname: fullnameINT.value,
+                phone_number: phone_numberINT.value,
+                password: passwordINT.value
+            }
+
+            try{
+                const response = await fetch(`${api_key}/signup`,{
+                    method: 'POST',
+                    headers:{
+                    'Content-Type':'application/json'
+                    },
+                    body: JSON.stringify(userData)
+                })
+
+                const result = await response.json();
+
+                if(response.ok){
+                    FBM.textContent = 'Registration Sucessful.. redirecting'
+                    FBM.style.color = 'green'
+                    window.location.href = 'login.html';
+                }else{
+                    FBM.textContent = `ERROR: ${result.error}`
+                    FBM.style.color = 'darkred'
+                }
+
+            }catch(error){
+                console.error(`We have ${error}`)
+                FBM.textContent = 'Unable to connect to the server'
+                FBM.style.color = 'darkred'
+                signup.reset();
+            }
+        }
+        submitBtn.addEventListener(`click`, handleSignup)
+    </script>
+</body>
+</html>
