@@ -6,6 +6,7 @@ const fs = require("fs");
 const bcrypt = require("bcryptjs");
 
 const app = express();
+app.use(express.static("public"))
 app.use(cors());
 app.use(express.json());
 
@@ -132,7 +133,8 @@ function getUserList() {
 }
 
 app.get("/", (req, res) => {
-  res.send("IIC Chat + Auth Server Running with User List & Status");
+  //res.send("IIC Chat + Auth Server Running with User List & Status");
+  res.sendFile(__dirname + "/public/login.html")
 });
 
 const port = 5001;
